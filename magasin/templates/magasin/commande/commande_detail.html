@@ -1,0 +1,39 @@
+{% include 'magasin/base.html' %}
+{% load static%}
+{% block content %}
+
+
+<form method='POST' class="post-form">
+{% csrf_token %}
+<div class="album py-5 bg-light">
+  <h1 class="commande-title">Commande {{ commande.id }}</h1>
+  <p>Date de la commande: {{ commande.dateCde }}</p>
+  <p class="commande-total">Total de la commande: {{ commande.totalCde }}</p>
+  {% for fournisseur in commande.fournisseurs.all %}
+  <p>fournisseur: {{ fournisseur.nom }}</p>
+  <!-- Add any additional information or buttons here -->
+
+  {% endfor %}
+  <div class="container">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+      {% for produit in commande.produits.all %}
+        <div class="col"> 
+        <div class="card shadow-sm">
+          <img src="{{ produit.image.url }}" alt="{{ produit.libellé }} image" class="card-img-top" height="200px"  width="200px">
+          <div class="card-body">
+            <figcaption class="figure-caption"> 
+              {{ produit.libellé }} 
+               </figcaption>
+               <p>{{ produit.prix }} DT </p>   
+
+                <div class="d-flex justify-content-between align-items-center">
+            </div>
+
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}

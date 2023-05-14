@@ -1,0 +1,97 @@
+{% include 'magasin/base.html' %}
+
+
+{% block content %}
+
+
+<form method='POST' class="post-form">
+{% csrf_token %}
+{% if user.is_superuser %}
+<div class="album py-5 bg-light">
+  <div class="container">
+    <button type="button" class="btn btn-sm btn-outline-secondary" ><a href="{% url 'ADDProduit' %}"class="btn btn-default">Ajouter Article</a></button>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+      {% for article in products %}
+      <div class="col ">
+        <div class="card shadow-sm">
+          <img src='/media/{{ article.image }}' class="card-img-top" height="200px"  width="200px">
+          <div class="card-body">
+            <figcaption class="figure-caption"> 
+              {{article.libellé}} 
+               </figcaption>
+               <p> {{article.description}} </p>
+               <p> {{article.prix}} DT. </p>           
+                <div class="d-flex justify-content-between align-items-center">
+              <div class="btn-group">
+                <button type="button" class="btn btn-sm btn-outline-primary" ><a href="{% url 'detail' article.id %}"class="btn btn-default">  View</a></button>
+                <button type="button" class="btn btn-sm btn-outline-secondary"><a href="{% url 'editProduit' article.id %}"class="btn btn-default">Edit</a></button>
+              </div>
+              <button type="button" class="btn btn-sm btn-outline-danger"><a href="{% url 'deleteProduit' article.id%}"class="btn btn-default">Delete</a></button>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% else  %}
+<div class="album py-5 bg-light">
+  <div class="container">
+    
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+      {% for article in products %}
+      <div class="col ">
+        <div class="card shadow-sm">
+          <img src='/media/{{ article.image }}' class="card-img-top" height="200px"  width="200px">
+          <div class="card-body">
+            <figcaption class="figure-caption"> 
+              {{article.libellé}} 
+               </figcaption>
+               <p> {{article.description}} </p>
+               <p> {{article.prix}} DT. </p> 
+               <div>
+               <button type="button" class="btn btn-sm btn-outline-secondary" ><a href="{% url 'Commande' %}"class="btn btn-default">Ajouter Commande</a></button>
+
+                <button type="button" class="btn btn-sm btn-outline-primary" ><a href="{% url 'detail' article.id %}"class="btn btn-default">  View</a></button>
+        
+              </div>
+              
+            </div>
+          </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    {% endif %}
+{% endblock %}
+{% comment %} {% extends 'magasin/base.html' %}
+
+{% load static %}
+{% block content %}
+<form method='POST' class="post-form">
+{% csrf_token %}
+<div class="container">
+<div style="overflow:scroll; border:#000000 1px solid;">
+<button type='button'><a href="{%url 'ADDProduit'%}">ajouter un produit</a></button>
+<table>
+ <tr>
+
+{% for article in products %}
+<td>
+ <img src='/media/{{ article.image }}'class="rounded float-start" height="200px"width="200px" alt="">
+  <figcaption class="figure-caption"> 
+ {{article.libelle}} 
+  </figcaption>
+  <p> {{article.img}} </p>
+  <p> {{article.prix}} DT. </p>
+ </td>
+ {% endfor %}
+  </tr>
+  </table>
+ </div>
+ </form> 
+ </div>
+ {% endblock %} {% endcomment %}
+ 

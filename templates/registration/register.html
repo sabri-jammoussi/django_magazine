@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+  <center>
+  <h2>S'inscrire</h2> 
+  </center>
+  <form method="post">
+    {% csrf_token %}
+    <table>
+      {% for field in form %}
+      <tr>
+        <td>{{ field.label_tag }}</td>
+        <td>{{ field }}</td>
+      </tr>
+      {% for error in field.errors %}
+      <tr>
+        <td></td>
+        <td class="error">{{ error }}</td>
+      </tr>
+      {% endfor %}
+      {% endfor %}
+    </table>
+    <center>
+    <button type="submit"  class="login-button" >S'inscrire</button> 
+    </center>
+  </form>
+  <center>
+    <small>Déjà inscrit.e? <a href="{% url 'login' %}">Se connecter</a></small>
+  </center>
+</div>
+
+<style>
+.container {
+   max-width: 400px;
+   margin: 0 auto;
+   padding: 20px;
+   border: 1px solid #ccc;
+   border-radius: 5px;
+   background-color: #f5f5f5;
+}
+
+form {
+  margin-bottom: 20px;
+}
+
+table {
+  margin: 0 auto;
+  width: 70%;
+}
+
+td {
+  padding: 5px;
+}
+
+.error {
+  color: red;
+  font-size: 14px;
+}
+.login-button {
+   display: block;
+   margin-top: 20px;
+   padding: 10px 20px;
+   background-color: red;
+   color: white;
+   border: none;
+   border-radius: 3px;
+   font-size: 16px;
+   cursor: pointer;
+   transition: background-color 0.2s ease;
+ }
+ 
+ .login-button:hover {
+   background-color: #af4c63;
+ }
+
+</style>
+
+{% endblock %}

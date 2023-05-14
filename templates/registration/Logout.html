@@ -1,0 +1,31 @@
+{% extends "magasin/base.html" %}
+
+{% block content %}
+  <div class="d-flex flex-column justify-content-center align-items-center vh-100">
+    <h2 class="mb-5">Vous êtes déconnecté.</h2>
+    <button type="button" class="btn btn-sm btn-outline-primary"><a href="{% url 'login' %}" class="btn btn-default text-decoration-none">Se reconnecter</a></button>
+  </div>
+{% endblock %}
+
+<style>
+  /* Add custom styles here */
+  body {
+    background-color: #f8f9fa;
+  }
+  h2 {
+    font-size: 2rem;
+    color: #495057;
+  }
+  button {
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    margin-top: 2rem;
+  }
+  button:hover {
+    background-color: #007bff;
+    color: #fff;
+  }
+</style>
+
+<!-- Add Bootstrap CSS in the head tag -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.2/css/bootstrap.min.css" integrity="sha512-JH76FJfRgWgm9tFyfEjyAOML5YJEG8hM7Qbg5JZm5O5/x0W8ApBrlab7PsdnEYrV7Gkq3/dJh7BZg+PCCn7j9A==" crossorigin="anonymous" referrerpolicy="no-referrer" />

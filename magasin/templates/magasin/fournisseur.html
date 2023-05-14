@@ -1,0 +1,77 @@
+{% extends 'magasin/base.html' %}
+
+{% block content %}
+
+
+<form method='POST' class="post-form">
+{% csrf_token %}
+{% if user.is_superuser %}
+<div class="album py-5 bg-light">
+  <div class="container">
+    <button type="button" class="btn btn-sm btn-outline-secondary" ><a href="{% url 'ADDFournisseur' %}"class="btn btn-default">Ajouter un Fourniseur</a></button>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+      {% for fornis in fournisseur %}
+      <div class="col ">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <figcaption class="figure-caption"> 
+              {{fornis.nom}} 
+               </figcaption>
+               <p> {{fornis.adresse}} </p>
+               <p> {{fornis.email}} </p> 
+               <p>{{fornis.telephone}}</p>          
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                          {% comment %} <button type="button" class="btn btn-sm btn-outline-primary" ><a href="{% url 'fournisseurdetail' fornis.id %}"class="btn btn-default">View</a></button> {% endcomment %}
+                          <button type="button" class="btn btn-sm btn-outline-secondary"><a href="{% url 'editFournisseur' fornis.id %}" class="btn btn-default">Edit</a></button>
+                        </div>
+                        <div>
+                        <button type="button" class="btn btn-sm btn-outline-danger"><a href="{% url 'deleteFournisseur' fornis.id %}" class="btn btn-default">Delete</a></button>
+                      </div>
+                    </div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% else %}
+<div class="album py-5 bg-light">
+  <div class="container">
+    {% comment %} <button type="button" class="btn btn-sm btn-outline-secondary" ><a href="{% url 'ADDFournisseur' %}"class="btn btn-default">Ajouter un Fourniseur</a></button> {% endcomment %}
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+      {% for fornis in fournisseur %}
+      <div class="col ">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <figcaption class="figure-caption"> 
+              {{fornis.nom}} 
+               </figcaption>
+               <p> {{fornis.adresse}} </p>
+               <p> {{fornis.email}} </p> 
+               <p>{{fornis.telephone}}</p>          
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                          {% comment %} <button type="button" class="btn btn-sm btn-outline-primary" ><a href="{% url 'fournisseurdetail' fornis.id %}"class="btn btn-default">View</a></button> {% endcomment %}
+                          {% comment %} <button type="button" class="btn btn-sm btn-outline-secondary"><a href="{% url 'editFournisseur' fornis.id %}" class="btn btn-default">Edit</a></button> {% endcomment %}
+                        </div>
+                        <div>
+                        {% comment %} <button type="button" class="btn btn-sm btn-outline-danger"><a href="{% url 'deleteFournisseur' fornis.id %}" class="btn btn-default">Delete</a></button> {% endcomment %}
+                      </div>
+                    </div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endif %}
+{% endblock %}
